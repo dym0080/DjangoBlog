@@ -1,9 +1,8 @@
 # DjangoBlog
 
-🌍
-*[English](/docs/README-en.md) ∙ [简体中文](README.md)*
+> 本项目用于研究 `Django` 项目，原始项目来源：https://github.com/liangliangyy/DjangoBlog
 
-基于`python3.6`和`Django2.1`的博客。   
+基于`python3.7.4`和`Django2.2.8`的博客。   
 
 [![Build Status](https://travis-ci.org/liangliangyy/DjangoBlog.svg?branch=master)](https://travis-ci.org/liangliangyy/DjangoBlog) [![codecov](https://codecov.io/gh/liangliangyy/DjangoBlog/branch/master/graph/badge.svg)](https://codecov.io/gh/liangliangyy/DjangoBlog) [![Requirements Status](https://requires.io/github/liangliangyy/DjangoBlog/requirements.svg?branch=master)](https://requires.io/github/liangliangyy/DjangoBlog/requirements/?branch=master)  [![license](https://img.shields.io/github/license/liangliangyy/djangoblog.svg)]()  
 
@@ -21,21 +20,10 @@
 - 集成了微信公众号功能，现在可以使用微信公众号来管理你的vps了。
 
 ## 安装
-mysql客户端从`pymysql`修改成了`mysqlclient`，具体请参考 [pypi](https://pypi.org/project/mysqlclient/) 查看安装前的准备。
 
 使用pip安装： `pip install -Ur requirements.txt`
 
-如果你没有pip，使用如下方式安装：
-- OS X / Linux 电脑，终端下执行: 
 
-    ```
-    curl http://peak.telecommunity.com/dist/ez_setup.py | python
-    curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
-    ```
-
-- Windows电脑：
-
-    下载 http://peak.telecommunity.com/dist/ez_setup.py 和 https://raw.github.com/pypa/pip/master/contrib/get-pip.py 这两个文件，双击运行。 
 
 ### 配置
 配置都是在 `setting.py` 中，部分配置迁移到了后台配置中。
@@ -53,17 +41,19 @@ mysql客户端从`pymysql`修改成了`mysqlclient`，具体请参考 [pypi](htt
 
 ## 运行
 
- 修改`DjangoBlog/setting.py` 修改数据库配置，如下所示：
+本项目使用 `Postgres` 数据库，修改 `DjangoBlog/setting.py` 修改数据库配置，如下所示：
+
+> 可随意选择你喜好的数据库
 
 ```python
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangoblog',
-        'USER': 'root',
-        'PASSWORD': 'password',
-        'HOST': 'host',
-        'PORT': 3306,
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'djangoblogdb',
+        'USER': 'postgres',
+        'PASSWORD': 'qwer1234',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 ```
@@ -76,50 +66,36 @@ CREATE DATABASE `djangoblog` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8
 
 然后终端下执行:
 ```bash
-./manage.py makemigrations
-./manage.py migrate
+py manage.py makemigrations
+py manage.py migrate
 ```
-
-**注意：** 在使用 `./manage.py` 之前需要确定你系统中的 `python` 命令是指向 `python 3.6` 及以上版本的。如果不是如此，请使用以下两种方式中的一种：
-
-- 修改 `manage.py` 第一行 `#!/usr/bin/env python` 为 `#!/usr/bin/env python3`
-- 直接使用 `python3 ./manage.py makemigrations`
 
 ### 创建超级用户
 
  终端下执行:
 ```bash
-./manage.py createsuperuser
+py manage.py createsuperuser
 ```
 
 ### 创建测试数据
 终端下执行:
 ```bash
-./manage.py create_testdata
+py manage.py create_testdata
 ```
 
 ### 收集静态文件
 终端下执行:  
 ```bash
-./manage.py collectstatic --noinput
-./manage.py compress --force
+py manage.py collectstatic --noinput
+py manage.py compress --force
 ```
 
 ### 开始运行：
-执行： `./manage.py runserver`
+执行： `py manage.py runserver`
 
 
 浏览器打开: http://127.0.0.1:8000/  就可以看到效果了。
 ## 更多配置:
 [更多配置介绍](/docs/config.md)
 
-## 问题相关
 
-有任何问题欢迎提Issue,或者将问题描述发送至我邮箱 `liangliangyy#gmail.com`.我会尽快解答.推荐提交Issue方式.  
-
----
- ## 致大家🙋‍♀️🙋‍♂️
- 如果本项目帮助到了你，请在[这里](https://github.com/liangliangyy/DjangoBlog/issues/214)留下你的网址，让更多的人看到。
-您的回复将会是我继续更新维护下去的动力。 
-
-🙏🙏🙏
