@@ -17,7 +17,7 @@ before_install:
 install:
   - pip install -r requirements.txt
 before_script:
-  - postgresql -e 'CREATE DATABASE `djangoblogdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;'
+  - postgres=# CREATE DATABASE djangoblogdb
   - py manage.py makemigrations
   - py manage.py migrate
 # command to run tests
