@@ -18,8 +18,8 @@ install:
   - pip install -r requirements.txt
 before_script:
   - psql -c 'create database djangoblogdb;' -U postgres
-  - py manage.py makemigrations
-  - py manage.py migrate
+  - python manage.py makemigrations
+  - python manage.py migrate
 # command to run tests
 script:
-  - py manage.py test
+  - python manage.py test
