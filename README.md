@@ -2,9 +2,9 @@
 
 > 本项目用于研究 `Django` 项目，原始项目来源：https://github.com/liangliangyy/DjangoBlog
 
-基于`python3.7.4`和`Django2.2.8`的博客。   
+> todo: 代码基本没经过pylint检测修复。
 
-[![Build Status](https://travis-ci.org/liangliangyy/DjangoBlog.svg?branch=master)](https://travis-ci.org/liangliangyy/DjangoBlog) [![codecov](https://codecov.io/gh/liangliangyy/DjangoBlog/branch/master/graph/badge.svg)](https://codecov.io/gh/liangliangyy/DjangoBlog) [![Requirements Status](https://requires.io/github/liangliangyy/DjangoBlog/requirements.svg?branch=master)](https://requires.io/github/liangliangyy/DjangoBlog/requirements/?branch=master)  [![license](https://img.shields.io/github/license/liangliangyy/djangoblog.svg)]()  
+基于 `python3.7.4` 和 `Django2.2.8` 的博客。
 
 ## 主要功能：
 - 文章，页面，分类目录，标签的添加，删除，编辑等。文章及页面支持`Markdown`，支持代码高亮。
