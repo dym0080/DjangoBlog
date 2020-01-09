@@ -88,7 +88,7 @@ def model_post_save_callback(sender, instance, created, raw, using, update_field
                 notify_url = instance.get_full_url()
                 SpiderNotify.baidu_notify([notify_url])
             except Exception as ex:
-                logger.error("notify sipder", ex)
+                logger.error("notify sipder" + ex)
         if not is_update_views:
             clearcache = True
     if isinstance(instance, Comment):
