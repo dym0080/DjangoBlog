@@ -1,11 +1,16 @@
 from django.test import Client, RequestFactory, TestCase
+from blog.templatetags.blog_tags import gravatar_url, gravatar
 from blog.models import Article, Category, Tag, SideBar, Links
+from DjangoBlog.utils import save_user_avatar, send_email
+from DjangoBlog.spider_notify import SpiderNotify
+from DjangoBlog.spider_notify import SpiderNotify
 from django.contrib.auth import get_user_model
 from DjangoBlog.utils import get_current_site, get_md5
 from blog.forms import BlogSearchForm
 from django.core.paginator import Paginator
 from blog.templatetags.blog_tags import load_pagination_info, load_articletags
 import datetime
+import requests
 from accounts.models import BlogUser
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.conf import settings
@@ -21,7 +26,7 @@ class ArticleTest(TestCase):
         self.factory = RequestFactory()
 
     def test_validate_article(self):
-        site = get_current_site().domain
+        # site = get_current_site().domain
         user = BlogUser.objects.get_or_create(email="liangliangyy@gmail.com", username="liangliangyy")[0]
         user.set_password("liangliangyy")
         user.is_staff = True
@@ -75,7 +80,6 @@ class ArticleTest(TestCase):
             article.save()
         response = self.client.get(article.get_absolute_url())
         self.assertEqual(response.status_code, 200)
-        from DjangoBlog.spider_notify import SpiderNotify
         SpiderNotify.notify(article.get_absolute_url())
         response = self.client.get(tag.get_absolute_url())
         self.assertEqual(response.status_code, 200)
@@ -113,11 +117,10 @@ class ArticleTest(TestCase):
         f = BlogSearchForm()
         f.search()
         self.client.login(username='liangliangyy', password='liangliangyy')
-        from DjangoBlog.spider_notify import SpiderNotify
+
         SpiderNotify.baidu_notify([article.get_full_url()])
 
-        from blog.templatetags.blog_tags import gravatar_url, gravatar
-        u = gravatar_url('liangliangyy@gmail.com')
+        # u = gravatar_url('liangliangyy@gmail.com')
         u = gravatar('liangliangyy@gmail.com')
 
         link = Links(sequence=1, name="lylinux", link='https://wwww.lylinux.net')
@@ -156,7 +159,6 @@ class ArticleTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_image(self):
-        import requests
         rsp = requests.get('https://www.python.org/static/img/python-logo@2x.png')
         imagepath = os.path.join(settings.BASE_DIR, 'python.png')
         with open(imagepath, 'wb') as file:
@@ -170,15 +172,12 @@ class ArticleTest(TestCase):
             rsp = self.client.post('/upload?sign=' + sign, form_data, follow=True)
 
             self.assertEqual(rsp.status_code, 200)
-        from DjangoBlog.utils import save_user_avatar, send_email
         send_email(['qq@qq.com'], 'testTitle', 'testContent')
         save_user_avatar('https://www.python.org/static/img/python-logo@2x.png')
-        """
-        data = SimpleUploadedFile(imagepath, b'file_content', content_type='image/jpg')
-        rsp = self.client.post('/upload', {'django.jpg': data})
-        self.assertEqual(rsp.status_code, 200)
-        SimpleUploadedFile()
-        """
+        # data = SimpleUploadedFile(imagepath, b'file_content', content_type='image/jpg')
+        # rsp = self.client.post('/upload', {'django.jpg': data})
+        # self.assertEqual(rsp.status_code, 200)
+        # SimpleUploadedFile()
 
     def test_errorpage(self):
         rsp = self.client.get('/eee')

@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # encoding: utf-8
-
-
 """
 @version: ??
 @author: liangliangyy
-@license: MIT Licence 
+@license: MIT Licence
 @contact: liangliangyy@gmail.com
 @site: https://www.lylinux.net/
 @software: PyCharm
@@ -14,11 +12,9 @@
 """
 
 from django.core.management.base import BaseCommand
-from blog.models import Article, Tag, Category
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ObjectDoesNotExist
-import datetime
-
+from blog.models import Article, Tag, Category
+from DjangoBlog.utils import cache
 
 class Command(BaseCommand):
     help = 'create test datas'
@@ -48,7 +44,5 @@ class Command(BaseCommand):
             article.tags.add(tag)
             article.tags.add(basetag)
             article.save()
-
-        from DjangoBlog.utils import cache
         cache.clear()
         self.stdout.write(self.style.SUCCESS('created test datas \n'))

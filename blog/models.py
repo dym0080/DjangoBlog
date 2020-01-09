@@ -74,9 +74,10 @@ class Article(BaseModel):
     type = models.CharField('类型', max_length=1, choices=TYPE, default='a')
     views = models.PositiveIntegerField('浏览量', default=0)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者', blank=False, null=False,
-                               on_delete=models.CASCADE)
+                            on_delete=models.CASCADE)
     article_order = models.IntegerField('排序,数字越大越靠前', blank=False, null=False, default=0)
-    category = models.ForeignKey('Category', verbose_name='分类', on_delete=models.CASCADE, blank=False, null=False)
+    category = models.ForeignKey('Category', verbose_name='分类',
+        on_delete=models.CASCADE, blank=False, null=False)
     tags = models.ManyToManyField('Tag', verbose_name='标签集合', blank=True)
 
     def body_to_string(self):
@@ -285,5 +286,4 @@ class BlogSettings(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        from DjangoBlog.utils import cache
         cache.clear()

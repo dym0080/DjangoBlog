@@ -3,7 +3,7 @@
 """
 @version: ??
 @author: liangliangyy
-@license: MIT Licence 
+@license: MIT Licence
 @contact: liangliangyy@gmail.com
 @site: https://www.lylinux.net/
 @software: PyCharm
@@ -12,10 +12,10 @@
 """
 
 from django.core.management.base import BaseCommand
-from blog.models import Article, Tag, Category
+from blog.models import Tag, Category
 
 
-# TODO 参数化
+# TO DO 参数化
 class Command(BaseCommand):
     help = 'build search words'
 
