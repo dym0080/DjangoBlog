@@ -1,4 +1,4 @@
-os: windows
+dist: xenial
 language: python
 sudo: required
 python:
@@ -20,4 +20,4 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
 # command to run tests
 script:
-  - py manage.py test
+  - pytest
